@@ -96,7 +96,7 @@ If you find our method useful, please kindly cite our paper.
       eprint={2410.11119},
       archivePrefix={arXiv},
       primaryClass={cs.CL},
-      note={Accept to ACL 2025}, 
+      note={Accepted to ACL 2025}, 
 }
 ```
 
