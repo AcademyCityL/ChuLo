@@ -40,9 +40,6 @@
 Implementation of ChuLo method in [ChuLo: Chunk-Level Key Information Representation for Long Document Understanding](https://arxiv.org/abs/2410.11119). 
 
 
-key_phrase_split PromptRank
-key_phrase_split2 YAKE
-
 ## Updates
 - [29/05/2025]:🎉 Open source!
 
