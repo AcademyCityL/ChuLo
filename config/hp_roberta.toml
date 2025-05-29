@@ -1,0 +1,54 @@
+# default parameters
+seed = 10
+name = 'roberta_hp'
+retain_ckp = false
+[EXPERIMENT]
+devices = 1
+accelerator = 'gpu'
+epochs = 10
+accumulate_grad_batches = 1
+save_path = 'results/experiments/roberta_hp/'
+val_check_interval = 1.0
+precision = 32
+optimizer = 'adamw'
+optimizer_params = {}
+lrscheduler = 'cosinewarmup'
+lrscheduler_params={}
+lr = 0.00005
+monitor = 'val_loss'
+mode = 'min'
+loss = 'ce' # ce_1, ce
+warmup = 0.1
+# steps = 3000
+stop_strategy = 'early_stop'
+  
+[MODEL]
+name = 'BERT'
+model_name = 'roberta-base'
+num_labels = 2
+freeze = false
+embedding  = {initialization='original'}
+attn_mode = {name='default',param1=0}
+
+[DATA]
+datasets_dir = 'data'
+dataset_name = 'hyperpartisan'
+batch_size=16
+train_ratio= 1
+val_split_ratio = 0.1
+num_workers = 4
+max_seq_len = 512
+tokenizer_type = "bert"
+# v1
+tokenizer_name =  'roberta-base'
+# v2
+# tokenizer_name =  'bert-base-uncased'
+tokenizer_params = {clean=true,lowercase=true,add_spe_tokens=['[LOC]']}
+processer = {name='LongformerHp'}
+
+
+
+
+
+
+

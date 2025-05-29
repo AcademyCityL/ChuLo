@@ -1,0 +1,75 @@
+# default parameters
+seed = 49
+name = 'fixed_key_phrase_chunk_rep_gum'
+retain_ckp = true
+cn = '2rmsprop'
+[PARAMSGRID]
+MODEL_-attn_mode=[
+# {name='key_phrase_chunk_rep',param1=500,param2='fixed_weights',param3='0.1_0.5'},
+# {name='key_phrase_chunk_rep',param1=200,param2='fixed_weights',param3='0.1_0.5'},
+# {name='key_phrase_chunk_rep',param1=70,param2='fixed_weights',param3='0.1_0.8'},
+# {name='key_phrase_chunk_rep',param1=50,param2='fixed_weights',param3='0.1_0.8'},
+# {name='key_phrase_chunk_rep',param1=40,param2='fixed_weights',param3='0.1_0.8'},
+# {name='key_phrase_chunk_rep',param1=30,param2='fixed_weights',param3='0.1_0.8'},
+# {name='key_phrase_chunk_rep',param1=20,param2='fixed_weights',param3='0.1_0.8'},
+# {name='key_phrase_chunk_rep',param1=10,param2='fixed_weights',param3='0.1_0.8'},
+{name='key_phrase_chunk_rep',param1=5,param2='fixed_weights',param3='0.1_0.8'},
+{name='key_phrase_chunk_rep',param1=10,param2='fixed_weights',param3='0.1_0.8'},
+{name='key_phrase_chunk_rep',param1=50,param2='fixed_weights',param3='0.1_0.8'},
+{name='key_phrase_chunk_rep',param1=70,param2='fixed_weights',param3='0.1_0.8'},
+{name='key_phrase_chunk_rep',param1=100,param2='fixed_weights',param3='0.1_0.8'},
+# {name='key_phrase_chunk_rep2',param1=50,param2='fixed_weights',param3='0.1_0.8'},
+# {name='key_phrase_chunk_rep2',param1=10,param2='fixed_weights',param3='0.1_0.8'},
+# {name='key_phrase_chunk_rep2',param1=5,param2='fixed_weights',param3='0.1_0.8'},
+# {name='key_phrase_chunk_rep',param1=50,param2='average_weights',param3='0.1_0.8'},
+# {name='key_phrase_chunk_rep',param1=10,param2='average_weights',param3='0.1_0.8'},
+# {name='key_phrase_chunk_rep',param1=5,param2='average_weights',param3='0.1_0.8'},
+]
+[EXPERIMENT]
+devices = 1
+accelerator = 'gpu'
+epochs = 100
+accumulate_grad_batches = 1
+save_path = 'results/experiments/fixed_key_phrase_chunk_rep_gum/'
+val_check_interval = 1.0
+precision = 32
+optimizer = 'rmsprop'
+optimizer_params = {}
+lrscheduler = 'linearwarmup'
+lrscheduler_params={}
+lr = 0.00005
+monitor = 'val_micro_f1'
+mode = 'max'
+loss = 'ce' # ce_1, ce
+warmup = 0.1
+# steps = 3000
+stop_strategy = 'early_stop'
+stop_patience = 10
+  
+[MODEL]
+name = 'BERT'
+model_name = 'bert-base-uncased'
+num_labels = 21
+freeze = false
+embedding  = {initialization='chunk_pretrain_emb', kwargs={model_name='bert-base-uncased', dim=768,freeze=false,way='sum',norm=true}}
+attn_mode = {name='key_phrase_chunk_rep',param1=10,param2='fixed_weights',param3='0.1_0.5'}
+decoder_cfg = {selfattn = 'slide_win', add_cross_attention=true,hidden_layer=12,dec_max_seq_len=4096,sliding_win=[256,256],causal=false}
+
+[DATA]
+datasets_dir = 'data'
+dataset_name = 'gum'
+batch_size = 8
+train_ratio = 1
+num_workers = 0
+max_seq_len = 510
+tokenizer_type = "bert"
+tokenizer_name = 'bert-base-uncased'
+tokenizer_params = {clean=true,lowercase=true,add_spe_tokens=['[LOC]']}
+processer = {name='None'}
+
+
+
+
+
+
+

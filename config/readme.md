@@ -1,0 +1,1 @@
+- vocab: For MR,SST,Offens,Tweet, use *_transformer_vocab for wordpiece tokenizer, *_vocab for discocat tokenizer. For R8,R52,Ohsumed, use *_vocab for wordpiece tokenizer, *_discocat_vocab for discocat tokenizer.

@@ -1,0 +1,58 @@
+# default parameters
+seed = 44
+name = 'longformer_hp_etr_240915'
+retain_ckp = false
+
+EXPERIMENT_-warmup=[0.1,0.2]
+EXPERIMENT_-lr=[5e-5,1e-4,1e-5]
+
+[EXPERIMENT]
+devices = 1
+accelerator = 'gpu'
+epochs = 20
+accumulate_grad_batches = 1
+save_path = 'results/experiments/longformer_hp_etr_240915/'
+val_check_interval = 1.0
+precision = 32
+optimizer = 'adam'
+optimizer_params = {}
+lrscheduler = 'linearwarmup'
+lrscheduler_params={}
+lr = 0.00005
+monitor = 'val_acc'
+mode = 'max'
+loss = 'ce' # ce_1, ce
+warmup = 0.1
+# steps = 3000
+stop_strategy = 'early_stop'
+  
+[MODEL]
+name = 'BERT'
+model_name = 'allenai/longformer-base-4096'
+num_labels = 2
+freeze = false
+embedding  = {initialization='original'}
+attn_mode = {name='default',param1=0}
+
+[DATA]
+datasets_dir = 'data'
+dataset_name = 'hyperpartisan'
+batch_size=16
+train_ratio= 1
+val_split_ratio = 0.1
+num_workers = 4
+max_seq_len = 4096
+tokenizer_type = "bert"
+# v1
+tokenizer_name =  'allenai/longformer-base-4096'
+# v2
+# tokenizer_name =  'bert-base-uncased'
+tokenizer_params = {clean=true,lowercase=true,add_spe_tokens=['[LOC]']}
+processer = {name='LongformerHp'}
+
+
+
+
+
+
+

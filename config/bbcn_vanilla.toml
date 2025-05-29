@@ -1,0 +1,63 @@
+# default parameters
+seed = 10
+name = 'vanilla_transformer_bbcn'
+retain_ckp = true
+[EXPERIMENT]
+devices = 1
+accelerator = 'gpu'
+epochs = 100
+accumulate_grad_batches = 1
+save_path = 'results/experiments/vanilla_transformer_bbcn/'
+val_check_interval = 1.0
+precision = 32
+optimizer = 'adamw'
+optimizer_params = {}
+lrscheduler = 'cosinewarmup'
+lrscheduler_params={}
+lr = 0.00005
+monitor = 'val_loss'
+mode = 'min'
+loss = 'ce' # ce_1, ce
+warmup = 300
+# steps = 3000
+stop_strategy = 'early_stop'
+  
+[MODEL]
+name = 'transformer_encoder'
+dropout = 0.3
+# v1
+embedding  = {initialization='random', kwargs={dim=512,freeze=false}}
+d_model = 512
+output_dim = 512
+# v2
+# embedding  = {initialization='pretrain', kwargs={model_name='bert-base-uncased', dim=768, freeze=true}}
+# d_model = 768
+# output_dim = 768
+hidden_dim = 2048
+layers = 6
+head = 8 
+attn_mode = {name='default'}
+pe_type = 'absolute_sin'
+
+[DATA]
+datasets_dir = 'data'
+dataset_name = 'bbcn'
+batch_size=64
+train_ratio= 1
+val_split_ratio = 0.1
+num_workers = 4
+max_seq_len = 512
+tokenizer_type = "bert"
+# v1
+tokenizer_name =  'wordpiece'
+# v2
+# tokenizer_name =  'bert-base-uncased'
+tokenizer_params = {clean=true,lowercase=true,add_spe_tokens=['[LOC]']}
+processer = {name='LongformerHp'}
+
+
+
+
+
+
+

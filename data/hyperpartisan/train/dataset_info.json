@@ -1,0 +1,62 @@
+{
+  "builder_name": "hyperpartisan_news_detection",
+  "citation": "@inproceedings{kiesel-etal-2019-semeval,\n    title = \"{S}em{E}val-2019 Task 4: Hyperpartisan News Detection\",\n    author = \"Kiesel, Johannes  and\n      Mestre, Maria  and\n      Shukla, Rishabh  and\n      Vincent, Emmanuel  and\n      Adineh, Payam  and\n      Corney, David  and\n      Stein, Benno  and\n      Potthast, Martin\",\n    booktitle = \"Proceedings of the 13th International Workshop on Semantic Evaluation\",\n    month = jun,\n    year = \"2019\",\n    address = \"Minneapolis, Minnesota, USA\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/S19-2145\",\n    doi = \"10.18653/v1/S19-2145\",\n    pages = \"829--839\",\n    abstract = \"Hyperpartisan news is news that takes an extreme left-wing or right-wing standpoint. If one is able to reliably compute this meta information, news articles may be automatically tagged, this way encouraging or discouraging readers to consume the text. It is an open question how successfully hyperpartisan news detection can be automated, and the goal of this SemEval task was to shed light on the state of the art. We developed new resources for this purpose, including a manually labeled dataset with 1,273 articles, and a second dataset with 754,000 articles, labeled via distant supervision. The interest of the research community in our task exceeded all our expectations: The datasets were downloaded about 1,000 times, 322 teams registered, of which 184 configured a virtual machine on our shared task cloud service TIRA, of which in turn 42 teams submitted a valid run. The best team achieved an accuracy of 0.822 on a balanced sample (yes : no hyperpartisan) drawn from the manually tagged corpus; an ensemble of the submitted systems increased the accuracy by 0.048.\",\n}\n",
+  "config_name": "byarticle",
+  "dataset_size": 2803927,
+  "description": "Hyperpartisan News Detection was a dataset created for PAN @ SemEval 2019 Task 4.\nGiven a news article text, decide whether it follows a hyperpartisan argumentation, i.e., whether it exhibits blind, prejudiced, or unreasoning allegiance to one party, faction, cause, or person.\n\nThere are 2 parts:\n- byarticle: Labeled through crowdsourcing on an article basis. The data contains only articles for which a consensus among the crowdsourcing workers existed.\n- bypublisher: Labeled by the overall bias of the publisher as provided by BuzzFeed journalists or MediaBiasFactCheck.com.\n",
+  "download_checksums": {
+    "data/articles-training-byarticle-20181122.zip": {
+      "num_bytes": 971841,
+      "checksum": null
+    },
+    "data/ground-truth-training-byarticle-20181122.zip": {
+      "num_bytes": 28511,
+      "checksum": null
+    }
+  },
+  "download_size": 1000352,
+  "features": {
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "title": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "hyperpartisan": {
+      "dtype": "bool",
+      "_type": "Value"
+    },
+    "url": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "published_at": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "https://pan.webis.de/semeval19/semeval19-web/",
+  "license": "",
+  "size_in_bytes": 3804279,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 2803927,
+      "num_examples": 645,
+      "dataset_name": "hyperpartisan_news_detection"
+    }
+  },
+  "supervised_keys": {
+    "input": "text",
+    "output": "label"
+  },
+  "version": {
+    "version_str": "1.0.0",
+    "description": "Version Training and validation v1",
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  }
+}

@@ -1,0 +1,54 @@
+# default parameters
+seed = 10
+name = 'bb_conll'
+retain_ckp = true
+[EXPERIMENT]
+devices = 1
+accelerator = 'gpu'
+epochs = 10
+accumulate_grad_batches = 1
+save_path = 'results/experiments/bb_conll/'
+val_check_interval = 1.0
+precision = 32
+optimizer = 'adamw'
+optimizer_params = {}
+lrscheduler = 'linearwarmup'
+lrscheduler_params={}
+lr = 0.00005
+monitor = 'val_micro_f1'
+mode = 'max'
+loss = 'ce' # ce_1, ce
+warmup = 0.1
+# steps = 3000
+stop_strategy = 'early_stop'
+  
+[MODEL]
+name = 'BERT'
+model_name = 'google/bigbird-roberta-base'
+num_labels = 37
+freeze = false
+embedding  = {initialization='original'}
+attn_mode = {name='default',param1=0}
+token_cls = true
+token_cls_conll = true
+# attn_mode = {name='key_phrase_split',param1=10,param2='all_locs'}
+
+[DATA]
+datasets_dir = 'data'
+dataset_name = 'conll'
+batch_size=4
+train_ratio= 1
+val_split_ratio = 0.1
+num_workers = 0
+max_seq_len = 4096
+tokenizer_type = "bert"
+tokenizer_name =  'google/bigbird-roberta-base'
+tokenizer_params = {clean=true,lowercase=true,add_spe_tokens=['[LOC]']} # only this dataset need add_prefix_space
+processer = {name='None'}
+
+
+
+
+
+
+
