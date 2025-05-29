@@ -63,10 +63,6 @@ Transformer-based models have achieved remarkable success in various Natural Lan
 
 - Download the source code.
 
-- Download the whole datasets from the following links and unzip them to cover the data folder.
-
-  - [Data](https://drive.google.com/file/d/1jLtt4ni3aXOXGZgK7VfsCum0geqKYxHj/view?usp=sharing)
-
 ### 2.2 Extact the keyphrases
 
 We provide code to extract keyphrases from the datasets. We provide two methods to extract keyphrases, one is using YAKE, and the other is using PromptRank. Users can use the following example command to extract keyphrases from the datasets:
